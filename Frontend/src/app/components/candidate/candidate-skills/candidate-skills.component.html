@@ -1,0 +1,218 @@
+<p-toast></p-toast>
+<div class="card">
+    <p-toolbar *ngIf="!isfromemployer" styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <div  class="title" >
+                <h4>Candidate Skills</h4>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="right">
+            <button pButton type="button" pRipple label="New" (click)="openNew()" icon="pi pi-plus" 
+            class="p-button-rounded p-button-success mr-2" ></button>          
+        </ng-template>
+    </p-toolbar>
+  <p-table #candidateSkillsTable [value]="candidateSkillsDataList" 
+             dataKey="index" 
+             editMode="row"              
+             responsiveLayout="scroll">
+             <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 20px"></th>
+                    <th style="display: none;" pSortableColumn="SkillDetails_id">
+                        SkillDetails_id
+                       <p-sortIcon field="SkillDetails_id"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="HighestDegree">
+                        Degree/Course
+                       <p-sortIcon field="HighestDegree"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="University_Board">
+                        University/Board <p-sortIcon field="University_Board"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="InstituteName">
+                        Institute Name <p-sortIcon field="InstituteName"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="YearofPassout">
+                        Year of Passout <p-sortIcon field="YearofPassout"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="Percentage">
+                        Passout Percentage(%) <p-sortIcon field="Percentage"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="TechnicalSkills">
+                        Technical Skills <p-sortIcon field="TechnicalSkills"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="Cerification">
+                        Cerification <p-sortIcon field="Cerification"></p-sortIcon>
+                    </th>
+                    <th style="width:8rem"></th>
+                </tr>
+             </ng-template>
+             <ng-template pTemplate="body" 
+                 let-candidateSkillsRowData let-editing="editing" 
+                 let-ri="rowIndex">
+
+                <tr [pEditableRow]="candidateSkillsRowData">
+                    <td></td>
+                    <td style="display: none;">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                    [(ngModel)]="candidateSkillsRowData.SkillDetails_id" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ candidateSkillsRowData.SkillDetails_id }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                    [(ngModel)]="candidateSkillsRowData.HighestDegree" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ candidateSkillsRowData.HighestDegree }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                    [(ngModel)]="candidateSkillsRowData.University_Board" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ candidateSkillsRowData.University_Board }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                    [(ngModel)]="candidateSkillsRowData.InstituteName" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ candidateSkillsRowData.InstituteName }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="date" 
+                                [(ngModel)]="candidateSkillsRowData.YearofPassout" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ candidateSkillsRowData.YearofPassout  | date:'dd-MMM-yyyy' }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                    [(ngModel)]="candidateSkillsRowData.Percentage" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ candidateSkillsRowData.Percentage }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                               <textarea [(ngModel)]="candidateSkillsRowData.TechnicalSkills" 
+                                     type="text" pInputTextarea ></textarea>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ candidateSkillsRowData.TechnicalSkills }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                    [(ngModel)]="candidateSkillsRowData.Cerification" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ candidateSkillsRowData.Cerification }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td *ngIf="!isfromemployer" style="text-align:center">
+                        <button *ngIf="!editing" 
+                                 pButton pRipple type="button" 
+                                 pInitEditableRow icon="pi pi-pencil" 
+                                 (click)="onRowEditInit(candidateSkillsRowData, ri)"                                 
+                                 class="p-button-rounded 
+                                        p-button-text
+                                        p-button-success mr-2">
+                        </button>
+                        <button *ngIf="!editing" 
+                                pButton pRipple type="button" 
+                                pCancelEditableRow icon="pi pi-times"
+                                (click)="onRowEditCancel(candidateSkillsRowData, ri)"   
+                                style="color:red;"                                                             
+                                class="p-button-rounded 
+                                    p-button-text
+                                    p-button-success mr-2">
+                         </button>
+                       
+                    </td>
+                </tr>
+
+             </ng-template>
+</p-table>
+
+<p-dialog [(visible)]="candidateSkillsDialog" [style]="{width: '450px'}" header="Candidate Skills" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+
+        <div class="form-group field">
+            <label class="displaylabel" for="highestdegree">Degree/Course</label>
+            <input [(ngModel)]="candidateSkillsdetailObj.HighestDegree" class="displaytext" type="text" pInputText id="highestdegree" required autofocus />
+        </div>
+        <div class="form-group field">
+            <label class="displaylabel" for="university">University/Board</label>
+            <input [(ngModel)]="candidateSkillsdetailObj.University_Board" class="displaytext" type="text" pInputText id="university" required autofocus />
+        </div>
+        <div class="form-group field">
+            <label class="displaylabel" for="institutename">Institute Name</label>
+            <input [(ngModel)]="candidateSkillsdetailObj.InstituteName" class="displaytext" type="text" pInputText id="institutename" required autofocus />
+        </div>
+        <div class="form-group field">
+            <label class="displaylabel" for="yearofpassout">Year of Passout</label>
+            <input [(ngModel)]="candidateSkillsdetailObj.YearofPassout" class="displaytext" type="date" pInputText id="yearofpassout" required autofocus />
+        </div>
+        <div class="form-group field">
+            <label class="displaylabel" for="percentage">Passout Percentage(%) </label>
+            <input [(ngModel)]="candidateSkillsdetailObj.Percentage" class="displaytext" type="text" pInputText id="percentage" required autofocus />
+        </div>
+        <div class="form-group field">
+            <label class="displaylabel" for="technicalskills">Technical Skills</label>
+            <textarea [(ngModel)]="candidateSkillsdetailObj.TechnicalSkills" class="displaytext" type="text" required rows="3" cols="20" pInputTextarea id="technicalskills" required autofocus ></textarea>
+        </div>
+        <div class="form-group field">
+            <label class="displaylabel" for="cerification">Cerification</label>
+            <input [(ngModel)]="candidateSkillsdetailObj.Cerification" class="displaytext" type="text" pInputText id="cerification" required autofocus />
+        </div>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button (click)="hideDialog()" pButton pRipple label="Cancel" icon="pi pi-times" 
+        class="p-button-rounded p-button-success mr-2"></button> 
+       
+        <button  *ngIf="!isdelete" (click)="saveSkillDetails()" pButton pRipple label="Save" 
+        icon="pi pi-check" class="p-button-rounded p-button-success mr-2"></button> 
+       
+        <button  style="background-color:firebrick" *ngIf="isdelete" (click)="saveSkillDetails()" pButton pRipple label="Delete" 
+        icon="pi pi-check" class="p-button-rounded p-button-success mr-2"></button> 
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+
+</div>
+ 

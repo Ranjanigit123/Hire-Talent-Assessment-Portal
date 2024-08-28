@@ -1,0 +1,439 @@
+<p-toast></p-toast>
+<div class="card">
+    <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <div  class="title" >
+                <h4>Employer Jobs</h4>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="right">
+            <button pButton type="button" pRipple label="New"  (click)="openNew()"  icon="pi pi-plus" 
+            class="p-button-rounded p-button-success mr-2" ></button>          
+        </ng-template>
+    </p-toolbar>
+  <p-table #employerjobsTable [value]="employerjobsDataList"  
+             dataKey="index" 
+             editMode="row"              
+             responsiveLayout="scroll">
+             <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 20px"></th>
+                    <th style="display: none;" pSortableColumn="EmployerJobs_id">
+                        EmployerJobs_id
+                       <p-sortIcon field="EmployerJobs_id"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="JobTitle">
+                        JobTitle
+                       <p-sortIcon field="JobTitle"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="City">
+                        City <p-sortIcon field="City"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="State">
+                        State <p-sortIcon field="State"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="Country">
+                        Country <p-sortIcon field="Country"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="willRelocate">
+                        willRelocate <p-sortIcon field="willRelocate"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="willTravel">
+                        willTravel <p-sortIcon field="willTravel"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="FulltimeSalary">
+                        FulltimeSalary <p-sortIcon field="FulltimeSalary"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="HourlySalary">
+                        HourlySalary <p-sortIcon field="HourlySalary"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="EmploymentType">
+                        EmploymentType <p-sortIcon field="EmploymentType"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="Skill1">
+                        Skill1 <p-sortIcon field="Skill1"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="Skill1Experiance">
+                        Skill1Experiance <p-sortIcon field="Skill1Experiance"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="Skill2">
+                        Skill2 <p-sortIcon field="Skill2"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="Skill2Experiance">
+                        Skil2Experiance <p-sortIcon field="Skill2Experiance"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="Skill3">
+                        Skill3 <p-sortIcon field="Skill3"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="Skill3Experiance">
+                        Skill3Experiance <p-sortIcon field="Skill3Experiance"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="Skill4">
+                        Skill4 <p-sortIcon field="Skill4"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="Skill4Experiance">
+                        Skill4Experiance <p-sortIcon field="Skill4Experiance"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="Skill5">
+                        Skill5 <p-sortIcon field="Skill5"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="Skill5Experiance">
+                        Skill5Experiance <p-sortIcon field="Skill5Experiance"></p-sortIcon>
+                    </th>
+
+                    <th style="width:8rem"></th>
+                </tr>
+             </ng-template>
+             <ng-template pTemplate="body" 
+                 let-employerjobsRowData let-editing="editing" 
+                 let-ri="rowIndex">
+
+                <tr [pEditableRow]="employerjobsRowData">
+                    <td></td>
+                    <td style="display: none;">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                    [(ngModel)]="employerjobsRowData.EmployerJobs_id" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ employerjobsRowData.EmployerJobs_id }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                    [(ngModel)]="employerjobsRowData.JobTitle" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ employerjobsRowData.JobTitle }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                    [(ngModel)]="employerjobsRowData.City" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ employerjobsRowData.City }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                    [(ngModel)]="employerjobsRowData.State" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ employerjobsRowData.State }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                    [(ngModel)]="employerjobsRowData.Country" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ employerjobsRowData.Country }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                    [(ngModel)]="employerjobsRowData.willRelocate" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ employerjobsRowData.willRelocate }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                    [(ngModel)]="employerjobsRowData.willTravel" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ employerjobsRowData.willTravel }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                    [(ngModel)]="employerjobsRowData.FulltimeSalary" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ employerjobsRowData.FulltimeSalary }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                    [(ngModel)]="employerjobsRowData.HourlySalary" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ employerjobsRowData.HourlySalary }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                    [(ngModel)]="employerjobsRowData.EmploymentType" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ employerjobsRowData.EmploymentType }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                    [(ngModel)]="employerjobsRowData.Skill1" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ employerjobsRowData.Skill1 }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                    [(ngModel)]="employerjobsRowData.Skill1Experiance" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ employerjobsRowData.Skill1Experiance }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                    [(ngModel)]="employerjobsRowData.Skill2" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ employerjobsRowData.Skill2 }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                    [(ngModel)]="employerjobsRowData.Skill2Experiance" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ employerjobsRowData.Skill2Experiance }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                    [(ngModel)]="employerjobsRowData.Skill3" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ employerjobsRowData.Skill3 }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                    [(ngModel)]="employerjobsRowData.Skill3Experiance" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ employerjobsRowData.Skill3Experiance }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                    [(ngModel)]="employerjobsRowData.Skill4" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ employerjobsRowData.Skill4 }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                    [(ngModel)]="employerjobsRowData.Skill4Experiance" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ employerjobsRowData.Skill4Experiance }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                    [(ngModel)]="employerjobsRowData.Skill5" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ employerjobsRowData.Skill5 }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                    [(ngModel)]="employerjobsRowData.Skill5Experiance" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ employerjobsRowData.Skill5Experiance }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td style="text-align:center">
+                        <button *ngIf="!editing" 
+                                 pButton pRipple type="button" 
+                                 pInitEditableRow icon="pi pi-pencil" 
+                                 (click)="onRowEditInit(employerjobsRowData, ri)"                                 
+                                 class="p-button-rounded 
+                                        p-button-text
+                                        p-button-success mr-2">
+                        </button>
+                    </td>
+                    <td style="text-align:center">
+                        <button *ngIf="!editing" 
+                                pButton pRipple type="button" 
+                                pCancelEditableRow icon="pi pi-times"
+                                (click)="onRowEditCancel(employerjobsRowData, ri)"  
+                                style="color:red;"                               
+                                class="p-button-rounded 
+                                    p-button-text
+                                    p-button-success mr-2">
+                         </button>
+                    </td>
+                </tr>
+
+             </ng-template>
+</p-table>
+
+
+<p-dialog [(visible)]="employerjobsDialog" [style]="{width: '450px'}" header="Employer Job Details" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+
+        <div class="form-group field">
+            <label class="displaylabel" for="JobTitle">JobTitle</label>
+            <input [(ngModel)]="employerjobsdetailObj.JobTitle" class="displaytext" type="text" pInputText id="JobTitle" required autofocus />
+        </div>
+        <div class="form-group field">
+            <label class="displaylabel" for="City">City</label>
+            <input [(ngModel)]="employerjobsdetailObj.City" class="displaytext" type="text" pInputText id="City" required autofocus />
+        </div>
+        <div class="form-group field">
+            <label class="displaylabel" for="State">State</label>
+            <input [(ngModel)]="employerjobsdetailObj.State" class="displaytext" type="text" pInputText id="State" required autofocus />
+        </div>
+        <div class="form-group field">
+            <label class="displaylabel" for="Country">Country</label>
+            <input [(ngModel)]="employerjobsdetailObj.Country" class="displaytext" type="text" pInputText id="Country" required autofocus />
+        </div>
+        <div class="form-group field">
+            <label class="displaylabel" for="willRelocate">willRelocate</label>
+            <input [(ngModel)]="employerjobsdetailObj.willRelocate" class="displaytext" type="text" pInputText id="willRelocate" required autofocus />
+        </div>
+        <div class="form-group field">
+            <label class="displaylabel" for="willTravel">willTravel</label>
+            <input [(ngModel)]="employerjobsdetailObj.willTravel" class="displaytext" type="text" pInputText id="willTravel" required autofocus />
+        </div>
+        <div class="form-group field">
+            <label class="displaylabel" for="FulltimeSalary">FulltimeSalary</label>
+            <input [(ngModel)]="employerjobsdetailObj.FulltimeSalary" class="displaytext" type="text" pInputText id="FulltimeSalary" required autofocus />
+        </div>
+        <div class="form-group field">
+            <label class="displaylabel" for="HourlySalary">HourlySalary</label>
+            <input [(ngModel)]="employerjobsdetailObj.HourlySalary" class="displaytext" type="text" pInputText id="HourlySalary" required autofocus />
+        </div>
+        <div class="form-group field">
+            <label class="displaylabel" for="EmploymentType">EmploymentType</label>
+            <input [(ngModel)]="employerjobsdetailObj.EmploymentType" class="displaytext" type="text" pInputText id="EmploymentType" required autofocus />
+        </div>
+        <div class="form-group field">
+            <label class="displaylabel" for="Skill1">Skill1</label>
+            <input [(ngModel)]="employerjobsdetailObj.Skill1" class="displaytext" type="text" pInputText id="Skill1" required autofocus />
+        </div>
+        <div class="form-group field">
+            <label class="displaylabel" for="Skill1Experiance">Skill1Experiance</label>
+            <input [(ngModel)]="employerjobsdetailObj.Skill1Experiance" class="displaytext" type="text" pInputText id="Skill1Experiance" required autofocus />
+        </div>
+        <div class="form-group field">
+            <label class="displaylabel" for="Skill2">Skill2</label>
+            <input [(ngModel)]="employerjobsdetailObj.Skill2" class="displaytext" type="text" pInputText id="Skill2" required autofocus />
+        </div>
+        <div class="form-group field">
+            <label class="displaylabel" for="Skill2Experiance">Skill2Experiance</label>
+            <input [(ngModel)]="employerjobsdetailObj.Skill2Experiance" class="displaytext" type="text" pInputText id="Skill2Experiance" required autofocus />
+        </div>
+        <div class="form-group field">
+            <label class="displaylabel" for="Skill3">Skill3</label>
+            <input [(ngModel)]="employerjobsdetailObj.Skill3" class="displaytext" type="text" pInputText id="Skill3" required autofocus />
+        </div>
+        <div class="form-group field">
+            <label class="displaylabel" for="Skill3Experiance">Skill3Experiance</label>
+            <input [(ngModel)]="employerjobsdetailObj.Skill3Experiance" class="displaytext" type="text" pInputText id="Skill3Experiance" required autofocus />
+        </div>
+        <div class="form-group field">
+            <label class="displaylabel" for="Skill4">Skill4</label>
+            <input [(ngModel)]="employerjobsdetailObj.Skill4" class="displaytext" type="text" pInputText id="Skill4" required autofocus />
+        </div>
+        <div class="form-group field">
+            <label class="displaylabel" for="Skill4Experiance">Skill4Experiance</label>
+            <input [(ngModel)]="employerjobsdetailObj.Skill4Experiance" class="displaytext" type="text" pInputText id="Skill4Experiance" required autofocus />
+        </div>
+        <div class="form-group field">
+            <label class="displaylabel" for="Skill5">Skill5</label>
+            <input [(ngModel)]="employerjobsdetailObj.Skill5" class="displaytext" type="text" pInputText id="Skill5" required autofocus />
+        </div>
+        <div class="form-group field">
+            <label class="displaylabel" for="Skill5Experiance">Skill5Experiance</label>
+            <input [(ngModel)]="employerjobsdetailObj.Skill5Experiance" class="displaytext" type="text" pInputText id="Skill5Experiance" required autofocus />
+        </div>
+
+
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button (click)="hideDialog()" pButton pRipple label="Cancel" icon="pi pi-times" 
+        class="p-button-rounded p-button-success mr-2"></button> 
+       
+        <button  *ngIf="!isdelete"   pButton pRipple label="Save" 
+        icon="pi pi-check" (click)="saveEmployerJobsDetails()" class="p-button-rounded p-button-success mr-2"></button> 
+       
+        <button  style="background-color:firebrick" *ngIf="isdelete"  pButton pRipple label="Delete" 
+        icon="pi pi-check" (click)="saveEmployerJobsDetails()" class="p-button-rounded p-button-success mr-2"></button> 
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+
+</div>
+ 

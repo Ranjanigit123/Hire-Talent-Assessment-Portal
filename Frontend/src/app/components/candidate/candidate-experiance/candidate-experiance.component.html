@@ -1,0 +1,185 @@
+<p-toast></p-toast>
+<div class="card">
+    <p-toolbar *ngIf="!isfromemployer" styleClass="mb-4 gap-2">
+         
+        <ng-template pTemplate="left">
+            <div  class="title" >
+                <h4>Candidate Experiance details</h4>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="right">
+            <button pButton type="button" pRipple label="New" (click)="openNew()" icon="pi pi-plus" 
+            class="p-button-rounded p-button-success mr-2" ></button>          
+        </ng-template>
+    </p-toolbar>
+  <p-table #experianceTable [value]="experianceDataList" 
+             dataKey="index" 
+             editMode="row"              
+             responsiveLayout="scroll">
+
+             <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 20px"></th>
+                    <th style="display: none;" pSortableColumn="ExperienceDet_id">
+                        ExperienceDet_id
+                       <p-sortIcon field="ExperienceDet_id"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="CompanyName">
+                        Company Name 
+                       <p-sortIcon field="CompanyName"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="CompanyAddress">
+                        Company Address <p-sortIcon field="CompanyAddress"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="Designation">
+                        Designation <p-sortIcon field="Designation"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="StartDate">
+                        StartDate <p-sortIcon field="StartDate"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="EndDate">
+                        EndDate <p-sortIcon field="EndDate"></p-sortIcon>
+                    </th>
+                    <th style="width:8rem"></th>
+                </tr>
+             </ng-template>
+             <ng-template pTemplate="body" 
+                 let-experianceRowData let-editing="editing" 
+                 let-ri="rowIndex">
+
+                <tr [pEditableRow]="experianceRowData">
+                    <td></td>
+                    <td style="display: none;">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                    [(ngModel)]="experianceRowData.ExperienceDet_id" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ experianceRowData.ExperienceDet_id }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                    [(ngModel)]="experianceRowData.CompanyName" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ experianceRowData.CompanyName }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                 <textarea [(ngModel)]="experianceRowData.CompanyAddress" 
+                                     type="text" pInputTextarea ></textarea>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ experianceRowData.CompanyAddress }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" 
+                                [(ngModel)]="experianceRowData.Designation" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ experianceRowData.Designation }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="date" 
+                                [(ngModel)]="experianceRowData.StartDate" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ experianceRowData.StartDate | date:'dd-MMM-yyyy'}}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="date" 
+                                [(ngModel)]="experianceRowData.EndDate" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ experianceRowData.EndDate | date:'dd-MMM-yyyy' }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    
+
+
+                    <td  *ngIf="!isfromemployer" style="text-align:center">
+                        <button *ngIf="!editing" 
+                                 pButton pRipple type="button" 
+                                 pInitEditableRow icon="pi pi-pencil" 
+                                 (click)="onRowEditInit(experianceRowData, ri)"                                 
+                                 class="p-button-rounded 
+                                        p-button-text
+                                        p-button-success mr-2">
+                        </button>
+                        <button *ngIf="!editing" 
+                                pButton pRipple type="button" 
+                                pCancelEditableRow icon="pi pi-times"
+                                (click)="onRowEditCancel(experianceRowData, ri)"  
+                                style="color:red;"                               
+                                class="p-button-rounded 
+                                    p-button-text
+                                    p-button-success mr-2">
+                         </button>
+                    </td>
+                </tr>
+
+             </ng-template>
+</p-table>
+
+<p-dialog [(visible)]="experianceDialog" [visible]="experianceDialog" [style]="{width: '450px'}" header="Experiance Details" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+
+        <div class="form-group field">
+            <label class="displaylabel" for="companyname">Company Name</label>
+            <input [(ngModel)]="experiancedetailObj.CompanyName" class="displaytext" type="text" pInputText id="companyname" required autofocus />
+        </div>
+        <div class="form-group field">
+            <label class="displaylabel" for="companyaddress">Company Address</label>
+            <textarea [(ngModel)]="experiancedetailObj.CompanyAddress" class="displaytext" type="text" required rows="3" cols="20" pInputTextarea id="companyaddress" required autofocus ></textarea>
+        </div>
+        <div class="form-group field">
+            <label class="displaylabel" for="designation">Designation</label>
+            <input [(ngModel)]="experiancedetailObj.Designation" class="displaytext" type="text" pInputText id="designation" required autofocus />
+        </div>
+        <div class="form-group field">
+            <label class="displaylabel" for="startdate">Start Date</label>
+            <input [(ngModel)]="experiancedetailObj.StartDate" class="displaytext" type="date" pInputText id="startdate" required autofocus />
+        </div>
+        <div class="form-group field">
+            <label class="displaylabel" for="enddate">End Date</label>
+            <input [(ngModel)]="experiancedetailObj.EndDate" class="displaytext" type="date" pInputText id="enddate" required autofocus />
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button (click)="hideDialog()" pButton pRipple label="Cancel" icon="pi pi-times" 
+        class="p-button-rounded p-button-success mr-2"></button> 
+
+        <button  *ngIf="!isdelete" (click)="saveExperianceDetails()" pButton pRipple label="Save" 
+        icon="pi pi-check" class="p-button-rounded p-button-success mr-2"></button> 
+
+        <button  style="background-color:firebrick"  *ngIf="isdelete" (click)="saveExperianceDetails()" pButton pRipple label="Delete" 
+        icon="pi pi-check" class="p-button-rounded p-button-success mr-2"></button> 
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+
+</div>

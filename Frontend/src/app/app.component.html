@@ -1,0 +1,19 @@
+<!-- nav -->
+
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
+    <div class="navbar-nav">
+        
+        <a class="nav-item nav-link" routerLink="/">Home</a>
+        <a *ngIf="IsCandidate" class="nav-item nav-link" routerLink="/candidateskills">Skill details</a>
+        <a *ngIf="!IsCandidate" class="nav-item nav-link" routerLink="/employerjobs">Employer Jobs</a>
+        <a *ngIf="IsCandidate" class="nav-item nav-link" routerLink="/candidateexperiance">Experiance details</a>
+        <a class="nav-item nav-link" (click)="logout()">Logout</a>
+    </div>
+</nav> 
+
+<!-- main app container -->
+<div style="background-color: #fff;min-height: 100%;" class="container">
+    <router-outlet></router-outlet>
+</div>
+
+ 

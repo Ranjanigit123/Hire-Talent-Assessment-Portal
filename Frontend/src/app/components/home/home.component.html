@@ -1,0 +1,345 @@
+<p-toast></p-toast>
+ <!-- <div>
+                <h4>Welcome {{loggedCandidateName}}, You're logged in JOB Search Portal!!</h4>
+ </div> -->
+
+<div *ngIf="!IsCandidate"> 
+    <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <div  class="title" >
+                <h5>Macthing profiles</h5>
+            </div>
+        </ng-template>    
+    </p-toolbar>
+
+    <p-table #employerjobsTable [value]="candidateRegisDataList"  
+        dataKey="index" 
+        editMode="row"              
+        responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+      <tr>
+          <th style="width: 0px"></th>
+          <th style="display: none;" pSortableColumn="CandidateRegis_id">
+            CandidateRegis_id
+              <p-sortIcon field="CandidateRegis_id"></p-sortIcon>
+          </th>
+          <th pSortableColumn="JobTitle">
+            JobTitle
+              <p-sortIcon field="JobTitle"></p-sortIcon>
+          </th>
+          <th pSortableColumn="Firstname">
+            Firstname
+              <p-sortIcon field="Firstname"></p-sortIcon>
+          </th>
+          <th pSortableColumn="Lastname">
+            Lastname <p-sortIcon field="Lastname"></p-sortIcon>
+          </th>
+          <th pSortableColumn="Contactnumber">
+            Contactnumber <p-sortIcon field="Contactnumber"></p-sortIcon>
+          </th>
+          <th pSortableColumn="Emailid">
+            Emailid <p-sortIcon field="Emailid"></p-sortIcon>
+          </th>
+          <th pSortableColumn="City">
+            City <p-sortIcon field="City"></p-sortIcon>
+          </th>
+          <th style="width:8rem"></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" 
+        let-employerjobsRowData let-editing="editing" 
+        let-ri="rowIndex">
+
+            <tr [pEditableRow]="employerjobsRowData">
+                <td></td>
+                <td style="display: none;">
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" 
+                                [(ngModel)]="employerjobsRowData.CandidateRegis_id" />
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{ employerjobsRowData.CandidateRegis_id }}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" 
+                                [(ngModel)]="employerjobsRowData.JobTitle" />
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{ employerjobsRowData.JobTitle }}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" 
+                                [(ngModel)]="employerjobsRowData.Firstname" />
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{ employerjobsRowData.Firstname }}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" 
+                                [(ngModel)]="employerjobsRowData.Lastname" />
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{ employerjobsRowData.Lastname }}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" 
+                                [(ngModel)]="employerjobsRowData.Contactnumber" />
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{ employerjobsRowData.Contactnumber }}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" 
+                                [(ngModel)]="employerjobsRowData.Emailid" />
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{ employerjobsRowData.Emailid }}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>        
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" 
+                                [(ngModel)]="employerjobsRowData.City" />
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{ employerjobsRowData.City }}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>       
+                <td style="text-align:center">
+                    <button  
+                            pButton pRipple type="button" 
+                            label="Skills" 
+                            icon="pi pi-pencil" 
+                            (click)="viewCandidateDetails(employerjobsRowData, ri)"    
+                            class="p-button-rounded p-button-success mr-2">
+                    </button>
+                </td>
+                <td>
+                    <button  
+                            pButton pRipple type="button" 
+                            label="Experiance" 
+                            icon="pi pi-pencil" 
+                            (click)="viewExperianceDetails(employerjobsRowData, ri)"    
+                            class="p-button-rounded p-button-success mr-2">
+                    </button>
+                </td>
+                
+            </tr>
+
+    </ng-template>
+    </p-table>
+
+
+    <p-dialog [(visible)]="candidateDialog"  header="Candidate Skill Details" [modal]="true" styleClass="p-fluid">
+        <ng-template pTemplate="content">
+             <app-candidate-skills 
+             [isfromemployer]=true
+             [CandiRegis_idfromemployer] ="CandiRegis_idRowItem"></app-candidate-skills>
+        </ng-template>
+    
+        <ng-template pTemplate="footer">
+            <button (click)="hideDialog()"  pButton pRipple label="Cancel" icon="pi pi-times" 
+            class="p-button-rounded p-button-success mr-2"></button> 
+        </ng-template>
+    </p-dialog>
+
+    <p-dialog [(visible)]="experianceDialog"  header="Candidate Experiance Details" [modal]="true" styleClass="p-fluid">
+        <ng-template pTemplate="content">
+             <app-candidate-experiance 
+                [isfromemployer]=true
+                [CandiRegis_idfromemployer] ="CandiRegis_idRowItem">
+            </app-candidate-experiance>
+        </ng-template>
+    
+        <ng-template pTemplate="footer">
+            <button (click)="hideDialog()"  pButton pRipple label="Cancel" icon="pi pi-times" 
+            class="p-button-rounded p-button-success mr-2"></button> 
+        </ng-template>
+    </p-dialog>
+    
+    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+   
+</div>
+
+<div *ngIf="IsCandidate">
+    <div class="card">
+    <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <div  class="title" >
+                <h5>Macthing jobs</h5>
+            </div>
+        </ng-template>    
+    </p-toolbar>
+
+   <p-table #employerjobsTable [value]="selectedJobs"  
+          dataKey="index" 
+          editMode="row"              
+          responsiveLayout="scroll">
+          <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 0px"></th>
+                <th style="display: none;" pSortableColumn="EmployerJobs_id">
+                    EmployerJobs_id
+                    <p-sortIcon field="EmployerJobs_id"></p-sortIcon>
+                </th>
+                <th pSortableColumn="JobTitle">
+                    JobTitle
+                    <p-sortIcon field="JobTitle"></p-sortIcon>
+                </th>
+                <th pSortableColumn="City">
+                    City <p-sortIcon field="City"></p-sortIcon>
+                </th>
+                <th pSortableColumn="EmploymentType">
+                    EmploymentType <p-sortIcon field="EmploymentType"></p-sortIcon>
+                </th>
+                <th style="width:8rem"></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" 
+              let-employerjobsRowData let-editing="editing" 
+              let-ri="rowIndex">
+
+            <tr [pEditableRow]="employerjobsRowData">
+                <td></td>
+                <td style="display: none;">
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" 
+                                [(ngModel)]="employerjobsRowData.EmployerJobs_id" />
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{ employerjobsRowData.EmployerJobs_id }}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" 
+                                [(ngModel)]="employerjobsRowData.JobTitle" />
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{ employerjobsRowData.JobTitle }}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" 
+                                [(ngModel)]="employerjobsRowData.City" />
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{ employerjobsRowData.City }}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" 
+                                [(ngModel)]="employerjobsRowData.EmploymentType" />
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{ employerjobsRowData.EmploymentType }}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td style="text-align:center">
+                  <button  
+                           pButton pRipple type="button" 
+                           label="Apply" 
+                           icon="pi pi-pencil" 
+                           (click)="viewJobDetails(employerjobsRowData, ri)"    
+                           class="p-button-rounded p-button-success mr-2">
+                  </button>
+                  
+              </td>
+                
+            </tr>
+
+          </ng-template>
+    </p-table>
+
+
+    <p-dialog [(visible)]="employerjobsDialog" [style]="{width: '450px'}" header="Employer Job Details" [modal]="true" styleClass="p-fluid">
+      <ng-template pTemplate="content">
+  
+          <div class="form-group field">
+              <label class="displaylabel" for="JobTitle">JobTitle</label>
+              <label  class="displaytext" id="JobTitle">{{ employerjobsdetailObj.JobTitle}}</label>
+          </div>
+          <div class="form-group field">
+              <label class="displaylabel" for="City">City</label>
+              <label class="displaytext"  id="City">{{employerjobsdetailObj.City}}</label>
+          </div>
+          <div class="form-group field">
+              <label class="displaylabel" for="State">State</label>
+              <label   class="displaytext" id="State">{{employerjobsdetailObj.State}}</label>
+          </div>
+          <div class="form-group field">
+              <label class="displaylabel" for="Country">Country</label>
+              <label class="displaytext" id="Country">{{employerjobsdetailObj.Country}}</label>
+          </div>
+          <div class="form-group field">
+              <label class="displaylabel" for="willRelocate">willRelocate</label>
+              <label  class="displaytext" id="willRelocate">{{employerjobsdetailObj.willRelocate}}</label>
+          </div>
+          <div class="form-group field">
+              <label class="displaylabel" for="willTravel">willTravel</label>
+              <label class="displaytext" id="willTravel">{{employerjobsdetailObj.willTravel}}</label>
+          </div>
+          <div class="form-group field">
+              <label class="displaylabel" for="FulltimeSalary">FulltimeSalary</label>
+              <label class="displaytext" id="FulltimeSalary">{{employerjobsdetailObj.FulltimeSalary}}</label>
+          </div>
+          <div class="form-group field">
+              <label class="displaylabel" for="HourlySalary">HourlySalary</label>
+              <label class="displaytext" id="HourlySalary">{{employerjobsdetailObj.HourlySalary}}</label>
+          </div>
+          <div class="form-group field">
+              <label class="displaylabel" for="EmploymentType">EmploymentType</label>
+              <label class="displaytext" id="EmploymentType">{{employerjobsdetailObj.EmploymentType}}</label>
+          </div>
+          
+      </ng-template>
+  
+      <ng-template pTemplate="footer">
+          <button (click)="hideDialog()"  pButton pRipple label="Cancel" icon="pi pi-times" 
+          class="p-button-rounded p-button-success mr-2"></button> 
+          <button  pButton pRipple label="Apply Job" 
+          icon="pi pi-check" (click)="applyJobApplication()" class="p-button-rounded p-button-success mr-2"></button> 
+      </ng-template>
+  </p-dialog>
+  
+  <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+
+    </div>
+</div> 
+
+

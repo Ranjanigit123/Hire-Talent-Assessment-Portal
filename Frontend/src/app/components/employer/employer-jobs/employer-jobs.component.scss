@@ -1,0 +1,75 @@
+.displaylabel{
+    width: 40%!important;
+    vertical-align:top;
+}
+
+.displaytext{
+    display: inline-block;
+    width: 60%!important;
+}
+.card-header{
+    background-color: lightskyblue!important;
+}
+.card{
+    background-color: #f3f5f7!important;
+}
+.btn-display
+{
+    float:right;
+}
+
+:host ::ng-deep .p-dialog .product-image {
+    width: 150px;
+    margin: 0 auto 2rem auto;
+    display: block;
+}
+.displaylabel{
+    width: 40%!important;
+    vertical-align:top;
+}
+
+.displaytext{
+    display: inline-block;
+    width: 60%!important;
+}
+.card-header{
+    background-color: lightskyblue!important;
+}
+.card{
+    background-color: #f3f5f7!important;
+}
+.btn-display
+{
+    float:right;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td{
+    padding: 0px!important;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th{
+    padding: 7px!important;
+}
+
+:host ::ng-deep .mb-4, .my-4{
+    margin-bottom: 0px!important;
+}
+
+:host ::ng-deep .p-toolbar{
+    padding: 0px!important;
+}
+
+:host ::ng-deep .p-button{
+    background: #2196F3;
+    border: 1px solid #2196F3;    
+}
+
+:host ::ng-deep .p-button.p-button-success.p-button-text, .p-buttonset.p-button-success > .p-button.p-button-text, .p-splitbutton.p-button-success > .p-button.p-button-text{
+    color: #2196F3;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    padding-left: 20px;
+  }
