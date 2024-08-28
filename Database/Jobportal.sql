@@ -99,13 +99,13 @@ CREATE TABLE EmployerJobs(
 	Skill5 varchar(255),
 	Skill5Experiance varchar(255),
 	IsActive TINYINT,
-    PRIMARY KEY (EmployerJobs_id)); 
+        PRIMARY KEY (EmployerJobs_id)); 
      
 
 CREATE TABLE JobApplication(
-	JobApplication_id int NOT NULL AUTO_INCREMENT,
+    JobApplication_id int NOT NULL AUTO_INCREMENT,
     CandidateRegis_id int,
-	EmployerRegis_id int,
+    EmployerRegis_id int,
     EmployerJobs_id int,
     IsCandidate TINYINT,
     IsActive TINYINT,
